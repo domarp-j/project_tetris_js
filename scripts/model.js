@@ -60,7 +60,8 @@ TETRIS.model = {
 
   generatePiece: function() {
     this.currentPiece = new TETRIS.Piece();
-    this.currentPiece.coords = [{ x: 0, y: 0 }];
+    var x = Math.floor(Math.random() * this.width);
+    this.currentPiece.coords = [{ x: x, y: 0 }];
   },
 
   storePiece: function() {
