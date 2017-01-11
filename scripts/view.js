@@ -34,14 +34,23 @@ TETRIS.view = {
   },
 
   drawPiece: function(piece) {
-
     var x = piece.coords[0].x; // row id
     var y = piece.coords[0].y; // col id
 
     $('#game-board').children('#' + y )
       .children('#' + x)
       .addClass('piece');
+  },
 
+  renderPiece: function(lastPiece, currentPiece) {
+    this.undrawPiece(lastPiece);
+    this.drawPiece(currentPiece);
+  },
+
+  lookForKeyPress: function(registerKeyPress) {
+    $(document).on('keyup', function(event) {
+      registerKeyPress(event.keyCode);
+    });
   }
 
 };

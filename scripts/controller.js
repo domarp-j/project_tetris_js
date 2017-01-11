@@ -5,8 +5,25 @@ TETRIS.controller = {
   init: function() {
     TETRIS.model.init();
     TETRIS.view.init(TETRIS.model.width, TETRIS.model.height);
+    TETRIS.view.lookForKeyPress(this.registerKeyPress);
     this.gameLoop();
-    // this.controller.inputLoop();
+  },
+
+  registerKeyPress: function(keyCode) {
+    switch (keyCode) {
+      case 37: // left
+        TETRIS.model.movePiece('L');
+        break;
+      case 39: // right
+        TETRIS.model.movePiece('R');
+        break;
+      case 40: // down
+        // TETRIS.model.autoDrop();
+        break;
+      default:
+        return;
+    }
+    TETRIS.view.renderPiece(TETRIS.model.lastPiece, TETRIS.model.currentPiece);
   },
 
   movePieceDown: undefined,
@@ -19,16 +36,9 @@ TETRIS.controller = {
         TETRIS.model.generatePiece();
       } else {
         TETRIS.model.tic();
-        TETRIS.view.undrawPiece(TETRIS.model.lastPiece);
-        TETRIS.view.drawPiece(TETRIS.model.currentPiece);
+        TETRIS.view.renderPiece(TETRIS.model.lastPiece, TETRIS.model.currentPiece);
       }
     }, 200);
-  },
-
-  inputLoop: function() {
-    // listens for play input at each interval
-    // moves piece left/right or rotates depending on input
-    // most likely will have smaller intervals than gameLoop
   }
 
 };

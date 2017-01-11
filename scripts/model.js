@@ -68,6 +68,31 @@ TETRIS.model = {
     this.currentPiece.coords.forEach(function(coords) {
       TETRIS.model.board[coords.y][coords.x] = TETRIS.model.currentPiece.color;
     });
+  },
+
+  movePiece: function(direction) {
+
+    var delta = 0;
+
+    switch (direction) {
+      case 'L':
+        delta = -1;
+        break;
+      case 'R':
+        delta = 1;
+        break;
+      default:
+        return;
+    }
+
+    this.lastPiece = $.extend(true, {}, this.currentPiece);
+
+    this.currentPiece.coords.forEach(function(coords) {
+      var newX = coords.x + delta;
+      if (newX >= 0 && newX < TETRIS.model.width) {
+        coords.x = newX;
+      };
+    });
   }
 
 };
