@@ -21,7 +21,12 @@ var view = {
       $board.append($row);
 
     }
-
   },
+
+  drawPiece: function(piece) {
+    var x = piece.coords[0].x; // row id
+    var y = piece.coords[0].y; // col id
+    
+  }
 
 };

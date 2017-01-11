@@ -1,0 +1,14 @@
+.row {
+  margin-bottom: -3px;
+}
+
+.col {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+.piece {
+  background-color: blue; 
+}
