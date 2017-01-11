@@ -10,8 +10,10 @@ var controller = {
   gameLoop: function() {
     model.generatePiece();
     setInterval(function() {
+      model.checkForCollision();
       model.tic();
-      view.drawPiece(model.currentPiece); 
+      view.undrawPiece(model.lastPiece);
+      view.drawPiece(model.currentPiece);
     }, 1000);
   },
 

@@ -23,9 +23,23 @@ var view = {
     }
   },
 
-  drawPiece: function(piece) {
+  undrawPiece: function(piece) {
     var x = piece.coords[0].x; // row id
     var y = piece.coords[0].y; // col id
+
+    $('#game-board').children('#' + y )
+      .children('#' + x)
+      .removeClass('piece');
+  },
+
+  drawPiece: function(piece) {
+
+    var x = piece.coords[0].x; // row id
+    var y = piece.coords[0].y; // col id
+
+    $('#game-board').children('#' + y )
+      .children('#' + x)
+      .addClass('piece');
     
   }
 
