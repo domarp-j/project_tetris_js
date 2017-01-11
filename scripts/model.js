@@ -1,4 +1,6 @@
-var model = {
+var TETRIS = TETRIS || {};
+
+TETRIS.model = {
 
   width: 10,
   height: 20,
@@ -30,9 +32,14 @@ var model = {
   },
 
   checkForCollision: function() {
+
     var largestY = this.getLargestY();
 
     if (largestY === this.height - 1) {
+      return true;
+    }
+
+    if (this.board[largestY + 1][this.currentPiece.coords[0].x]) {
       return true;
     }
 
@@ -52,13 +59,13 @@ var model = {
   },
 
   generatePiece: function() {
-    this.currentPiece = new Piece();
-    this.currentPiece.coords = [{ x: 0, y: -1 }];
+    this.currentPiece = new TETRIS.Piece();
+    this.currentPiece.coords = [{ x: 0, y: 0 }];
   },
 
   storePiece: function() {
     this.currentPiece.coords.forEach(function(coords) {
-      this.board[coords.x][coords.y] = this.currentPiece.color;
+      TETRIS.model.board[coords.y][coords.x] = TETRIS.model.currentPiece.color;
     });
   }
 

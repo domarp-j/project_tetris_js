@@ -1,26 +1,28 @@
-var controller = {
+var TETRIS = TETRIS || {};
+
+TETRIS.controller = {
 
   init: function() {
-    model.init();
-    view.init(model.width, model.height);
-    controller.gameLoop();
-    // controller.inputLoop();
+    TETRIS.model.init();
+    TETRIS.view.init(TETRIS.model.width, TETRIS.model.height);
+    this.gameLoop();
+    // this.controller.inputLoop();
   },
 
   movePieceDown: undefined,
 
   gameLoop: function() {
-    model.generatePiece();
+    TETRIS.model.generatePiece();
     this.movePieceDown = setInterval(function() {
-      if (model.checkForCollision()) {
-        model.storePiece();
-        model.generatePiece();
+      if (TETRIS.model.checkForCollision()) {
+        TETRIS.model.storePiece();
+        TETRIS.model.generatePiece();
       } else {
-        model.tic();
-        view.undrawPiece(model.lastPiece);
-        view.drawPiece(model.currentPiece);
+        TETRIS.model.tic();
+        TETRIS.view.undrawPiece(TETRIS.model.lastPiece);
+        TETRIS.view.drawPiece(TETRIS.model.currentPiece);
       }
-    }, 500);
+    }, 200);
   },
 
   inputLoop: function() {
@@ -32,5 +34,5 @@ var controller = {
 };
 
 $(document).ready(function() {
-  controller.init();
+  TETRIS.controller.init();
 });

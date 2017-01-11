@@ -1,4 +1,6 @@
-var view = {
+var TETRIS = TETRIS || {};
+
+TETRIS.view = {
 
   init: function(width, height) {
     this.buildBoard(width, height);
