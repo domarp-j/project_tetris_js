@@ -19,7 +19,6 @@ var view = {
       }
 
       $board.append($row);
-
     }
   },
 
@@ -40,7 +39,7 @@ var view = {
     $('#game-board').children('#' + y )
       .children('#' + x)
       .addClass('piece');
-    
+
   }
 
 };

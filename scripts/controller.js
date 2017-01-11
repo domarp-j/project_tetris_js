@@ -7,14 +7,20 @@ var controller = {
     // controller.inputLoop();
   },
 
+  movePieceDown: undefined,
+
   gameLoop: function() {
     model.generatePiece();
-    setInterval(function() {
-      model.checkForCollision();
-      model.tic();
-      view.undrawPiece(model.lastPiece);
-      view.drawPiece(model.currentPiece);
-    }, 1000);
+    this.movePieceDown = setInterval(function() {
+      if (model.checkForCollision()) {
+        model.storePiece();
+        model.generatePiece();
+      } else {
+        model.tic();
+        view.undrawPiece(model.lastPiece);
+        view.drawPiece(model.currentPiece);
+      }
+    }, 500);
   },
 
   inputLoop: function() {
