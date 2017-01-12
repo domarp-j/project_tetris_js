@@ -69,19 +69,26 @@ TETRIS.PieceModule = (function() {
   }
 
   // Rotate a piece based on its shape and current coordinates.
-  Piece.prototype.rotate = function() {
+  Piece.prototype.rotate = function(direction) {
     return;
   }
 
-  // Move a piece down with each tic.
+  // Increment a piece's y-coordinates with each tic.
   Piece.prototype.tic = function() {
-    return;
+    this.forEach(function(coords) {
+      coords.y += 1;
+    })
   }
 
-  // Return object
+  // Get a random shape from the _possibleShapes array
+  var getRandomShape = function() {
+    return _possibleShapes[Math.floor(Math.random() * _possibleShapes.length)];
+  }
+
+  // Return constructor and other public methods
   return {
-    Piece: Piece
+    Piece: Piece,
+    getRandomShape: getRandomShape
   }
-
 
 })();
