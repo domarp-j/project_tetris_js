@@ -6,6 +6,13 @@ TETRIS.PieceModule = (function() {
   var _possibleShapes =
     ["I", "L", "J", "O", "T", "Z", "S"];
 
+  // All possible colors for Tetris pieces.
+  // The shape and color of a piece are paired up by their indices in their
+  //   respective arrays.
+  // For example, a J-shaped piece will be the yellow.
+  var _possibleColors =
+    ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'aqua'];
+
   // Determine the starting coordinates based on the piece's shape.
   // The array 'coords' should only contain one coordinate object so far, which
   //   is the pivot coordinate.
@@ -58,20 +65,25 @@ TETRIS.PieceModule = (function() {
   // This is the constructor for a piece.
   function Piece(shape, startX, startY) {
     this.shape = shape;
+    this.color = _possibleColors[_possibleShapes.indexOf(shape)];
     this.coords = [{ x: startX, y: startY, pivot: true }];
     _getCoords(this.shape, this.coords);
   }
 
-  // Rotate a piece based on its shape and current coordinates.
-  Piece.prototype.rotate = function(direction) {
-    return;
+  // Get the smallest X coordinate for the piece
+  Piece.prototype.smallestX = function() {
+    return Math.min(
+      this.coords[0].x, this.coords[1].x,
+      this.coords[2].x, this.coords[3].x
+    )
   }
 
-  // Increment a piece's y-coordinates with each tic.
-  Piece.prototype.tic = function() {
-    this.coords.forEach(function(blockCoords) {
-      blockCoords.y += 1;
-    })
+  // Get the largest X coordinate for the piece
+  Piece.prototype.largestX = function() {
+    return Math.max(
+      this.coords[0].x, this.coords[1].x,
+      this.coords[2].x, this.coords[3].x
+    )
   }
 
   // Get a random shape from the _possibleShapes array

@@ -39,20 +39,61 @@ TETRIS.Model = (function(PieceModule) {
     currentPiece = new PieceModule.Piece(
       // get a random shape (as a letter)
       PieceModule.getRandomShape(),
-      // random x coordinate 
+      // random x coordinate
       1 + Math.floor(Math.random() * (width - 3)),
       // currentPiece always starts at y = 0
       0
     );
   }
 
-  // Store piece in board, setting the proper value in boards
-  //   equal to 'true'.
-  var storePiece = function() {
-    currentPiece.coords.forEach(function(coords) {
-      board[coords.y][coords.x] = true;
+  // Determine whether a wall is in the way of a potential
+  //   move.
+  var wallInWay = function(direction) {
+    return currentPiece.smallestX() === 0 && direction === 'L' ||
+      currentPiece.largestX() === width - 1 && direction === 'R'
+  }
+
+  // Determine whether a piece can move left or right, ensuring
+  //   that it does not go through the side walls.
+  // Call the piece's move() if move is possible.
+  var movePiece = function(direction) {
+    if (wallInWay(direction)) {
+      return;
+    }
+
+    var delta;
+
+    switch (direction) {
+      case 'L':
+        delta = -1;
+        break;
+      case 'R':
+        delta = 1;
+        break;
+      default:
+        console.error("Invalid direction passed into TETRIS.Model.movePiece().")
+        return;
+    }
+
+    currentPiece.coords.forEach(function(blockCoords) {
+      blockCoords.x += delta;
     })
   }
+
+  // Move a piece down with each tic
+  var tic = function() {
+    currentPiece.coords.forEach(function(blockCoords) {
+      blockCoords.y += 1;
+    })
+  }
+
+  // Store piece in board, setting the proper value in boards
+  //   equal to 'true'.
+  // var storePiece = function() {
+  //   currentPiece.coords.forEach(function(coords) {
+  //     board[coords.y][coords.x] = true;
+  //   })
+  // }
 
   // Model initialization
   var init = function(w, h) {
@@ -67,7 +108,9 @@ TETRIS.Model = (function(PieceModule) {
     getWidth: getWidth,
     getHeight: getHeight,
     getCurrentPiece: getCurrentPiece,
-    generatePiece: generatePiece
+    generatePiece: generatePiece,
+    movePiece: movePiece,
+    tic: tic
   }
 
 })(TETRIS.PieceModule);
