@@ -93,6 +93,61 @@ TETRIS.model = {
         coords.x = newX;
       };
     });
-  }
+  },
+
+  checkForFullRows: function() {
+    // loop over each row
+
+    for (var i = height; i >= 0; i++) {
+      var row = this.board[i];
+      if (rowFull(row)) {
+        // clear out that row
+
+        // change position of other boxes
+      }
+    }
+
+  },
+
+  rowFull: function(row) {
+    if (row.indexOf(false) > -1) {
+      return false;
+    }
+    return true;
+  },
 
 };
+
+
+// 1) we have some full rows
+
+// 4  #
+// 3  ####
+// 2  ## #
+// 1 |####|
+// 0 |# ##|
+
+// // 2) set all full rows to false, bottom up
+
+// // (could iterate from bottom up, if make entire pass of all 20 rows without finding a full row, then done. If find full row, then iterate from bottom up again)
+
+// // *** (another way: iterate through all rows, setting rows to false if the row is full. Then iterate through all rows again, if row is false, remove and increment numOfRowsToMoveDown. If row has stuff in it, move the row down by numOfRowsToMoveDown ) ***
+
+// 4  #
+// 3  ffff
+// 2  ## #
+// 1 |ffff|
+// 0 |# ##|
+
+// // 3) move down all rows that are above rows that are empty
+
+// 4
+// 3  
+// 2  #
+// 1 |## #|
+// 0 |# ##|
+
+// 4) render board
+
+
+
