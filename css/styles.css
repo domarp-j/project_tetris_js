@@ -5,6 +5,35 @@
 .col {
   width: 30px;
   height: 30px;
-  border: 1px solid black;
+  border: 1px solid #AAA;
   display: inline-block;
+  background-color: #EFEFEF
+}
+
+.i-piece {
+  background-color: red;
+}
+
+.l-piece {
+  background-color: orange;
+}
+
+.j-piece {
+  background-color: yellow;
+}
+
+.o-piece {
+  background-color: green;
+}
+
+.t-piece {
+  background-color: blue;
+}
+
+.z-piece {
+  background-color: purple;
+}
+
+.s-piece {
+  background-color: aqua;
 }

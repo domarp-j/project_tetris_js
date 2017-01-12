@@ -2,11 +2,13 @@ var TETRIS = TETRIS || {};
 
 TETRIS.Controller = (function(Model, View) {
 
+  // Controller initialization
   var init = function() {
-    Model.init(10, 20);
+    Model.init(10, 20); // width & height
     View.init(Model.getWidth(), Model.getHeight());
   }
 
+  // Public interface
   return {
     init: init
   }

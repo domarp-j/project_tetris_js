@@ -7,7 +7,7 @@ TETRIS.View = (function() {
   //   x & y coordinates for each cell.
   // NOTE: (0,0) will be located at the top left.
   var buildBoard = function(width, height) {
-    var $board = $('#game-board');
+    var $board = $('#gameboard');
 
     for (var row = 0; row < height; row++) {
       var $row = $('<div class="row">')
@@ -21,23 +21,32 @@ TETRIS.View = (function() {
     }
   }
 
+  // // Clear the board of all styles
+  var clearBoard = function() {
+    $('.col').css('background-color', '#EFEFEF');
+  }
+
   // Draw a piece on the board by setting the appropriate
   //   classes to each cell.
   // The piece stores the color
   var drawPiece = function(piece) {
     piece.coords.forEach(function(coords) {
-      $('#game-board').children('#' + coords.y)
+      $('#gameboard')
+        .children('#' + coords.y)
         .children('#' + coords.x)
-        .css('background-color', piece.color)
+        .addClass(piece.shape.toLowerCase() + '-piece'); 
     });
   }
 
+  // View initialization
   var init = function(width, height) {
     buildBoard(width, height);
   }
 
+  // Public interface
   return {
     init: init,
+    clearBoard: clearBoard,
     drawPiece: drawPiece
   }
 
@@ -46,7 +55,7 @@ TETRIS.View = (function() {
   // },
   //
   // buildBoard: function(width, height) {
-  //   var $board = $('#game-board');
+  //   var $board = $('#gameboard');
   //
   //   for (var row = 0; row < height; row++) {
   //
@@ -67,7 +76,7 @@ TETRIS.View = (function() {
   //   var x = piece.coords[0].x; // row id
   //   var y = piece.coords[0].y; // col id
   //
-  //   $('#game-board').children('#' + y )
+  //   $('#gameboard').children('#' + y )
   //     .children('#' + x)
   //     .removeClass('piece');
   // },
@@ -76,7 +85,7 @@ TETRIS.View = (function() {
   //   var x = piece.coords[0].x; // row id
   //   var y = piece.coords[0].y; // col id
   //
-  //   $('#game-board').children('#' + y )
+  //   $('#gameboard').children('#' + y )
   //     .children('#' + x)
   //     .addClass('piece');
   // },

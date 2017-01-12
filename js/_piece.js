@@ -2,14 +2,9 @@ var TETRIS = TETRIS || {};
 
 TETRIS.PieceModule = (function() {
 
-  // All possible colors and shapes for Tetris pieces.
-  // The shape and color of a piece have the same index in both arrays.
-  // For example, the 'L' piece will have the color 'orange', since both
-  //   values have an index of 1 in their respective arrays.
+  // All possible shapes for Tetris pieces.
   var _possibleShapes =
     ["I", "L", "J", "O", "T", "Z", "S"];
-  var _possibleColors = // TODO: seems like a View responsibility
-    ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'aqua'];
 
   // Determine the starting coordinates based on the piece's shape.
   // The array 'coords' should only contain one coordinate object so far, which
@@ -63,7 +58,6 @@ TETRIS.PieceModule = (function() {
   // This is the constructor for a piece.
   function Piece(shape, startX, startY) {
     this.shape = shape;
-    this.color = _possibleColors[_possibleShapes.indexOf(shape)];
     this.coords = [{ x: startX, y: startY, pivot: true }];
     _getCoords(this.shape, this.coords);
   }
@@ -85,6 +79,7 @@ TETRIS.PieceModule = (function() {
     return _possibleShapes[Math.floor(Math.random() * _possibleShapes.length)];
   }
 
+  // Public interface
   return {
     Piece: Piece,
     getRandomShape: getRandomShape

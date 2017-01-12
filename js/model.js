@@ -39,8 +39,8 @@ TETRIS.Model = (function(PieceModule) {
     currentPiece = new PieceModule.Piece(
       // get a random shape (as a letter)
       PieceModule.getRandomShape(),
-      // random x coordinate between 1 and width - 1
-      2 + Math.floor(Math.random() * (width -1)),
+      // random x coordinate 
+      1 + Math.floor(Math.random() * (width - 3)),
       // currentPiece always starts at y = 0
       0
     );
@@ -54,12 +54,14 @@ TETRIS.Model = (function(PieceModule) {
     })
   }
 
+  // Model initialization
   var init = function(w, h) {
     width = w;
     height = h;
     generateBoard();
   }
 
+  // Public interface
   return {
     init: init,
     getWidth: getWidth,
