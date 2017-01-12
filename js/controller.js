@@ -33,7 +33,7 @@ TETRIS.controller = {
     this.movePieceDown = setInterval(function() {
       if (TETRIS.model.checkForCollision()) {
         TETRIS.model.storePiece();
-        TETRIS.model.checkForFullRows();
+        // TETRIS.model.checkForFullRows();
         TETRIS.model.generatePiece();
       } else {
         TETRIS.model.tic();
