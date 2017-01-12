@@ -8,7 +8,7 @@ TETRIS.PieceModule = (function() {
   //   values have an index of 1 in their respective arrays.
   var _possibleShapes =
     ["I", "L", "J", "O", "T", "Z", "S"];
-  var _possibleColors =
+  var _possibleColors = // TODO: seems like a View responsibility
     ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'aqua'];
 
   // Determine the starting coordinates based on the piece's shape.
@@ -27,7 +27,7 @@ TETRIS.PieceModule = (function() {
       case 'L':
         coords.push({ x: pivot.x - 1, y: pivot.y });
         coords.push({ x: pivot.x + 1, y: pivot.y });
-        coords.push({ x: pivot.x - 1, y: pivit.y + 1 });
+        coords.push({ x: pivot.x - 1, y: pivot.y + 1 });
         break;
       case 'J':
         coords.push({ x: pivot.x - 1, y: pivot.y });
@@ -75,8 +75,8 @@ TETRIS.PieceModule = (function() {
 
   // Increment a piece's y-coordinates with each tic.
   Piece.prototype.tic = function() {
-    this.forEach(function(coords) {
-      coords.y += 1;
+    this.coords.forEach(function(blockCoords) {
+      blockCoords.y += 1;
     })
   }
 
@@ -85,7 +85,6 @@ TETRIS.PieceModule = (function() {
     return _possibleShapes[Math.floor(Math.random() * _possibleShapes.length)];
   }
 
-  // Return constructor and other public methods
   return {
     Piece: Piece,
     getRandomShape: getRandomShape
