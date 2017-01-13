@@ -87,13 +87,27 @@ TETRIS.Model = (function(PieceModule) {
     })
   }
 
-  // Store piece in board, setting the proper value in boards
-  //   equal to 'true'.
-  // var storePiece = function() {
-  //   currentPiece.coords.forEach(function(coords) {
-  //     board[coords.y][coords.x] = true;
-  //   })
-  // }
+  // Check if a collision is impending.
+  // This method is run ONLY after a tic() occurs.
+  // If the tic() causes a piece to overlap with a stored piece on the board,
+  //   the method returns true.
+  // It also returns true if the piece about to go past the bottom of the board.
+  var impendingCollision = function() {
+    if (currentPiece.largestY === height) {
+      return true;
+    }
+
+    for (var i = 0; i < currentPiece.coords.length; i++) {
+      if (currentPiece.coords[i].y === height) {
+        continue;
+      }
+      if (board[currentPiece.coords[i].x][currentPiece.coords[i].y]) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
   // Model initialization
   var init = function(w, h) {
@@ -110,7 +124,8 @@ TETRIS.Model = (function(PieceModule) {
     getCurrentPiece: getCurrentPiece,
     generatePiece: generatePiece,
     movePiece: movePiece,
-    tic: tic
+    tic: tic,
+    impendingCollision: impendingCollision
   }
 
 })(TETRIS.PieceModule);

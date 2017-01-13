@@ -86,6 +86,14 @@ TETRIS.PieceModule = (function() {
     )
   }
 
+  // Get the largest Y coordinate for the piece
+  Piece.prototype.largestY = function() {
+    return Math.max(
+      this.coords[0].y, this.coords[1].y,
+      this.coords[2].y, this.coords[3].y
+    )
+  }
+
   // Get a random shape from the _possibleShapes array
   var getRandomShape = function() {
     return _possibleShapes[Math.floor(Math.random() * _possibleShapes.length)];

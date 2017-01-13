@@ -2,12 +2,20 @@ var TETRIS = TETRIS || {};
 
 TETRIS.Controller = (function(Model, View) {
 
-  var gameSpeed = 1000;
+  var gameSpeed = 200;
+  var fallInterval = undefined;
 
   // Game loop
   var fallLoop = function() {
-    setInterval(function() {
+    fallInterval = setInterval(function() {
       Model.tic();
+      if (Model.impendingCollision()) {
+        clearInterval(fallInterval);
+        // Model.storePiece();
+        // Model.checkFullRows();
+        // Model.generatePiece();
+        console.log(Model.impendingCollision());
+      }
       View.clearBoard();
       View.drawPiece(Model.getCurrentPiece());
     }, gameSpeed);
